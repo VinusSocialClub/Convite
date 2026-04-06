@@ -73,6 +73,7 @@
 
     .envelope.open .flap { transform: rotateX(180deg); }
     .envelope.open .letter { transform: translateY(0); }
+
     .envelope.open .letter-content {
       opacity:1;
       transform: translateY(0);
@@ -146,17 +147,16 @@
       border-radius:20px;
       cursor:pointer;
       z-index:100;
-      display:none;
     }
   </style>
 </head>
 <body>
 
-<!-- MUSIC (piano clássico) -->
+<!-- MUSIC (piano clássico calma) -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2021/09/12/audio_1f01b2a0d7.mp3" type="audio/mp3">
 </audio>
-<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
 
 <!-- ENVELOPE -->
 <div class="scene" id="scene">
@@ -174,7 +174,6 @@
 
 <!-- MAIN -->
 <div class="main" id="main">
-
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
     <p>14 Outubro 2028 · Lisboa</p>
@@ -192,7 +191,6 @@
     <h2>Confirmação</h2>
     <button onclick="alert('RSVP em breve')">Confirmar</button>
   </section>
-
 </div>
 
 <script>
@@ -200,27 +198,21 @@
   const main = document.getElementById('main');
   const scene = document.getElementById('scene');
   const music = document.getElementById('music');
-  const musicBtn = document.getElementById('musicBtn');
 
   envelope.addEventListener('click', () => {
-    // Tocar música imediatamente no clique do usuário
-    music.volume = 0.4;
-    music.play().catch(() => console.log('Interação necessária para tocar música'));
-
-    // Abrir envelope visual
     envelope.classList.add('open');
+    scene.style.display = 'none';
+    main.classList.add('show');
 
-    // Mostrar botão de música
-    musicBtn.style.display = 'block';
+    // tocar música apenas aqui, no clique, garantindo que o browser permite
+    music.volume = 0.4;
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.then(_ => {}).catch(error => { console.log('Interação necessária para tocar música'); });
+    }
 
-    // Depois da animação, mostrar conteúdo principal
-    setTimeout(() => {
-      scene.style.display = 'none';
-      main.classList.add('show');
-
-      gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
-      gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
-    }, 1500);
+    gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
+    gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
   });
 
   function toggleMusic(){
