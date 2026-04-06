@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daniela & Alexandre</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Inter', sans-serif; background:#0e1a14; overflow:hidden; }
-    h1,h2 { font-family:'Playfair Display', serif; }
-
-    .scene { height:100vh; display:flex; justify-content:center; align-items:center; }
-
-    .envelope { width:340px; height:220px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px; }
-    .base { background:#1f3a2e; width:100%; height:100%; position:absolute; }
-    .flap { position:absolute; width:100%; height:100%; background:#2e5d46; clip-path: polygon(0 0, 50% 60%, 100% 0); transform-origin: top; transition: transform 1s ease; z-index:3; }
-    .letter { position:absolute; width:92%; height:92%; top:4%; left:4%; background:white; color:#111; padding:25px; text-align:center; transform: translateY(120%); transition: transform 1s ease; z-index:1; }
-    .letter-content { opacity:0; transform: translateY(10px); transition: all 0.8s ease; }
-    .envelope.open .flap { transform: rotateX(180deg); }
-    .envelope.open .letter { transform: translateY(0); }
-    .envelope.open .letter-content { opacity:1; transform: translateY(0); transition-delay:0.6s; }
-
-    .main { position:fixed; top:0; left:0; width:100%; height:100%; background:#f7f7f7; overflow-y:auto; opacity:0; visibility:hidden; transition: all 1s ease; }
-    .main.show { opacity:1; visibility:visible; }
-
-    section { min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; padding:40px; text-align:center; }
-
-    .hero { background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974'); background-size:cover; background-position:center; color:white; }
-
-    .gallery img { width:250px; margin:10px; border-radius:10px; }
-    .rsvp { background:#1f3a2e; color:white; }
-    button { margin-top:20px; padding:12px 24px; border:none; border-radius:30px; background:white; color:#1f3a2e; cursor:pointer; }
-    .music-btn { position:fixed; bottom:20px; right:20px; background:#1f3a2e; color:white; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; z-index:100; display:none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela & Alexandre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:'Inter',sans-serif; background:#0e1a14; overflow-x:hidden;}
+h1,h2 {font-family:'Playfair Display', serif;}
+.scene {height:100vh; display:flex; justify-content:center; align-items:center;}
+.envelope {width:340px;height:220px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px;}
+.base {background:#1f3a2e; width:100%; height:100%; position:absolute;}
+.flap {position:absolute; width:100%; height:100%; background:#2e5d46; clip-path: polygon(0 0,50% 60%,100% 0); transform-origin: top; transition: transform 1s ease; z-index:3;}
+.letter {position:absolute; width:92%; height:92%; top:4%; left:4%; background:white; color:#111; padding:25px; text-align:center; transform: translateY(120%); transition: transform 1s ease; z-index:1;}
+.letter-content {opacity:0; transform: translateY(10px); transition: all 0.8s ease;}
+.envelope.open .flap {transform: rotateX(180deg);}
+.envelope.open .letter {transform: translateY(0);}
+.envelope.open .letter-content {opacity:1; transform: translateY(0); transition-delay:0.6s;}
+.main {position:fixed; top:0; left:0; width:100%; height:100%; background:#f7f7f7; overflow-y:auto; opacity:0; visibility:hidden; transition: all 1s ease;}
+.main.show {opacity:1; visibility:visible;}
+section {min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; padding:40px; text-align:center;}
+.hero {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974'); background-size:cover; background-position:center; color:white;}
+.gallery img {width:250px; margin:10px; border-radius:10px;}
+.countdown {display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; background:#2e5d46; color:white; text-align:center; margin-top:20px;}
+.countdown .logo h1 {font-family:'Playfair Display', serif; font-size:60px; margin-bottom:15px;}
+.countdown h2 {font-size:20px; margin-bottom:30px; font-weight:400;}
+#timer {display:flex; gap:20px; justify-content:center; flex-wrap:wrap;}
+#timer div {background: rgba(255,255,255,0.1); padding:20px; border-radius:10px; min-width:80px;}
+#timer div span {font-size:32px; font-weight:700; display:block;}
+#timer div p {margin-top:5px; font-size:14px; font-weight:400;}
+.rsvp {background:#1f3a2e; color:white;}
+button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; background:white; color:#1f3a2e; cursor:pointer;}
+.music-btn {position:fixed; bottom:20px; right:20px; background:#1f3a2e; color:white; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; z-index:100; display:none;}
+</style>
 </head>
 <body>
 
 <!-- MUSIC -->
-<audio id="music" loop>
+<audio id="music" loop preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f4441b0e7.mp3" type="audio/mp3">
 </audio>
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
@@ -63,20 +61,6 @@
 
 <!-- MAIN -->
 <div class="main" id="main">
-  <!-- COUNTDOWN SECTION -->
-  <section class="countdown">
-    <div class="logo">
-      <h1>D&amp;A</h1>
-    </div>
-    <h2>Countdown to the most special day of our lives</h2>
-    <div id="timer">
-      <div><span id="days">0</span><p>Days</p></div>
-      <div><span id="hours">0</span><p>Hours</p></div>
-      <div><span id="minutes">0</span><p>Minutes</p></div>
-      <div><span id="seconds">0</span><p>Seconds</p></div>
-    </div>
-  </section>
-
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
     <p>14 Outubro 2028 · Lisboa</p>
@@ -86,6 +70,17 @@
     <h2>Momentos</h2>
     <div>
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
+      <!-- Countdown vai aqui abaixo da primeira foto -->
+      <section class="countdown">
+        <div class="logo"><h1>D&amp;A</h1></div>
+        <h2>Countdown to the most special day of our lives</h2>
+        <div id="timer">
+          <div><span id="days">0</span><p>Days</p></div>
+          <div><span id="hours">0</span><p>Hours</p></div>
+          <div><span id="minutes">0</span><p>Minutes</p></div>
+          <div><span id="seconds">0</span><p>Seconds</p></div>
+        </div>
+      </section>
       <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" />
     </div>
   </section>
@@ -97,49 +92,42 @@
 </div>
 
 <script>
-  const envelope = document.getElementById('envelope');
-  const main = document.getElementById('main');
-  const scene = document.getElementById('scene');
-  const music = document.getElementById('music');
-  const musicBtn = document.getElementById('musicBtn');
+// Countdown
+const weddingDate = new Date("October 14, 2028 00:00:00").getTime();
+const updateCountdown = () => {
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+  document.getElementById("days").textContent = Math.floor(distance / (1000*60*60*24));
+  document.getElementById("hours").textContent = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  document.getElementById("minutes").textContent = Math.floor((distance % (1000*60*60))/(1000*60));
+  document.getElementById("seconds").textContent = Math.floor((distance % (1000*60))/1000);
+};
+setInterval(updateCountdown,1000);
+updateCountdown();
 
-  // Countdown
-  const weddingDate = new Date("October 14, 2028 00:00:00").getTime();
-  const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+// Envelope click
+const envelope = document.getElementById('envelope');
+const main = document.getElementById('main');
+const scene = document.getElementById('scene');
+const music = document.getElementById('music');
+const musicBtn = document.getElementById('musicBtn');
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000*60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-  };
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  envelope.addEventListener('click', () => {
+envelope.addEventListener('click', () => {
     // Música funcional garantida
     music.volume = 0.4;
-    music.play().catch(() => console.log('Clique necessário para tocar música'));
+    music.play().catch(()=>console.log('Clique necessário para tocar música'));
     musicBtn.style.display = 'block';
 
     envelope.classList.add('open');
-    setTimeout(() => {
-      scene.style.display = 'none';
-      main.classList.add('show');
-      gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
-      gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
-    }, 1500);
-  });
+    setTimeout(()=>{
+        scene.style.display='none';
+        main.classList.add('show');
+        gsap.from('.hero h1', {opacity:0, y:50, duration:1});
+        gsap.from('.gallery img', {scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2});
+    },1500);
+});
 
-  function toggleMusic(){
-    if(music.paused){ music.play(); } else { music.pause(); }
-  }
+function toggleMusic(){if(music.paused) music.play(); else music.pause();}
 </script>
 
 </body>
