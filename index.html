@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daniela & Alexandre</title>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -20,14 +23,12 @@
 
     h1,h2 { font-family:'Playfair Display', serif; }
 
-    /* SCENE */
+    /* ENVELOPE */
     .scene {
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      position:relative;
-      z-index:10;
     }
 
     .envelope {
@@ -35,7 +36,7 @@
       height:220px;
       position:relative;
       cursor:pointer;
-      overflow:hidden; /* FIX: hides letter before opening */
+      overflow:hidden;
       border-radius:6px;
     }
 
@@ -44,7 +45,6 @@
       width:100%;
       height:100%;
       background:#1f3a2e;
-      border-radius:6px;
     }
 
     .flap {
@@ -55,7 +55,7 @@
       clip-path: polygon(0 0, 50% 60%, 100% 0);
       transform-origin: top;
       transition: transform 1s ease;
-      z-index:3; /* always above */
+      z-index:3;
     }
 
     .letter {
@@ -68,28 +68,19 @@
       color:#111;
       padding:25px;
       text-align:center;
-
-      /* FIX: fully hidden below */
       transform: translateY(120%);
       transition: transform 1s ease;
-      z-index:1; /* behind flap */
+      z-index:1;
     }
 
-    /* INITIAL STATE (hidden properly) */
     .letter-content {
       opacity:0;
       transform: translateY(10px);
       transition: all 0.8s ease;
     }
 
-    /* OPEN STATE */
-    .envelope.open .flap {
-      transform: rotateX(180deg);
-    }
-
-    .envelope.open .letter {
-      transform: translateY(0);
-    }
+    .envelope.open .flap { transform: rotateX(180deg); }
+    .envelope.open .letter { transform: translateY(0); }
 
     .envelope.open .letter-content {
       opacity:1;
@@ -97,18 +88,7 @@
       transition-delay:0.6s;
     }
 
-    .names {
-      font-size:26px;
-      margin-bottom:10px;
-    }
-
-    .date {
-      margin-top:10px;
-      font-size:13px;
-      letter-spacing:2px;
-    }
-
-    /* MAIN SITE */
+    /* MAIN */
     .main {
       position:fixed;
       top:0;
@@ -116,9 +96,7 @@
       width:100%;
       height:100%;
       background:#f7f7f7;
-      color:#111;
       overflow-y:auto;
-
       opacity:0;
       visibility:hidden;
     }
@@ -135,8 +113,8 @@
       justify-content:center;
       align-items:center;
       flex-direction:column;
-      text-align:center;
       padding:40px;
+      text-align:center;
     }
 
     .hero {
@@ -146,13 +124,16 @@
       color:white;
     }
 
-    .hero h1 {
-      font-size:42px;
-      margin-bottom:10px;
+    .hero h1 { font-size:42px; }
+
+    .gallery {
+      background:#ffffff;
     }
 
-    .details {
-      background:white;
+    .gallery img {
+      width:250px;
+      margin:10px;
+      border-radius:10px;
     }
 
     .rsvp {
@@ -170,24 +151,41 @@
       cursor:pointer;
     }
 
+    /* MUSIC BUTTON */
+    .music-btn {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#1f3a2e;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:20px;
+      cursor:pointer;
+      z-index:100;
+    }
+
   </style>
 </head>
 <body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🔊</button>
 
 <!-- ENVELOPE -->
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
     <div class="base"></div>
     <div class="flap"></div>
-
     <div class="letter">
       <div class="letter-content">
-        <div class="names">Daniela & Alexandre</div>
-        <div>Estão a casar</div>
-        <div class="date">14 · 10 · 2028</div>
+        <h2>Daniela & Alexandre</h2>
+        <p>14 · 10 · 2028</p>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -196,14 +194,15 @@
 
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
-    <p>14 Outubro 2028 · Viseu</p>
+    <p>14 Outubro 2028 · Lisboa</p>
   </section>
 
-  <section class="details">
-    <h2>Detalhes</h2>
-    <p>Cerimónia às 15:00</p>
-    <p>Receção às 18:00</p>
-    <p>Local: Viseu</p>
+  <section class="gallery">
+    <h2>Momentos</h2>
+    <div>
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
+      <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" />
+    </div>
   </section>
 
   <section class="rsvp">
@@ -217,23 +216,42 @@
   const envelope = document.getElementById('envelope');
   const main = document.getElementById('main');
   const scene = document.getElementById('scene');
+  const music = document.getElementById('music');
 
   envelope.addEventListener('click', () => {
     envelope.classList.add('open');
 
     setTimeout(() => {
-      gsap.to('.letter', {
-        y: -250,
-        duration: 1.2,
-        ease: 'power3.out'
-      });
-    }, 800);
-
-    setTimeout(() => {
       scene.style.display = 'none';
       main.classList.add('show');
-    }, 1800);
+      music.play();
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from('.hero h1', {
+        scrollTrigger: '.hero',
+        opacity:0,
+        y:50,
+        duration:1
+      });
+
+      gsap.from('.gallery img', {
+        scrollTrigger: '.gallery',
+        opacity:0,
+        y:50,
+        stagger:0.2
+      });
+
+    }, 1500);
   });
+
+  function toggleMusic(){
+    if(music.paused){
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
 </script>
 
 </body>
