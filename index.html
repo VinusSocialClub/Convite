@@ -73,7 +73,6 @@
 
     .envelope.open .flap { transform: rotateX(180deg); }
     .envelope.open .letter { transform: translateY(0); }
-
     .envelope.open .letter-content {
       opacity:1;
       transform: translateY(0);
@@ -147,6 +146,7 @@
       border-radius:20px;
       cursor:pointer;
       z-index:100;
+      display:none; /* aparecerá depois do clique */
     }
 
   </style>
@@ -157,7 +157,7 @@
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2021/09/12/audio_1f01b2a0d7.mp3" type="audio/mp3">
 </audio>
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
 <!-- ENVELOPE -->
 <div class="scene" id="scene">
@@ -201,19 +201,24 @@
   const main = document.getElementById('main');
   const scene = document.getElementById('scene');
   const music = document.getElementById('music');
+  const musicBtn = document.getElementById('musicBtn');
 
   envelope.addEventListener('click', () => {
     envelope.classList.add('open');
 
+    // mostrar botão de música
+    musicBtn.style.display = 'block';
+
     setTimeout(() => {
       scene.style.display = 'none';
       main.classList.add('show');
+
+      // tocar música após clique do utilizador
       music.volume = 0.4;
       music.play();
 
       gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
       gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
-
     }, 1500);
   });
 
