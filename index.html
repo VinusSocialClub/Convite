@@ -35,6 +35,8 @@
       height:220px;
       position:relative;
       cursor:pointer;
+      overflow:hidden; /* FIX: hides letter before opening */
+      border-radius:6px;
     }
 
     .base {
@@ -53,7 +55,7 @@
       clip-path: polygon(0 0, 50% 60%, 100% 0);
       transform-origin: top;
       transition: transform 1s ease;
-      z-index:3;
+      z-index:3; /* always above */
     }
 
     .letter {
@@ -67,10 +69,10 @@
       padding:25px;
       text-align:center;
 
-      /* IMPORTANT FIX */
-      transform: translateY(100%);
+      /* FIX: fully hidden below */
+      transform: translateY(120%);
       transition: transform 1s ease;
-      z-index:2;
+      z-index:1; /* behind flap */
     }
 
     /* INITIAL STATE (hidden properly) */
