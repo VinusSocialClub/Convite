@@ -1,81 +1,75 @@
 <!DOCTYPE html>
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:#111;
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela & Alexandre</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:#0e1a14;
+      color:#f5f5f5;
+      overflow:hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* Envelope Scene */
+    .scene {
+      height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      flex-direction:column;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity 1.5s ease;
+      position:relative;
     }
 
-    .final-screen.show {
-      opacity:1;
-      pointer-events:auto;
+    .envelope {
+      width:340px;
+      height:230px;
+      position:relative;
+      cursor:pointer;
+      perspective:1200px;
     }
 
-    .final-screen h2 {
-      font-size:40px;
-      margin-bottom:20px;
+    .base {
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:#1f3a2e;
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:6px;
     }
 
-    .final-screen p {
-      font-size:18px;
-      opacity:0.8;
+    .flap {
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:#2e5d46;
+      clip-path: polygon(0 0, 50% 55%, 100% 0);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index:3;
     }
 
-  </style>
-</head>
-<body>
-
-<div class="bg-glow"></div>
-
-<div class="scene">
-  <div class="envelope" id="envelope">
-    <div class="base"></div>
-    <div class="flap"></div>
-
-    <div class="letter">
-      <div class="content" id="content">
-        <h1>You're Invited</h1>
-        <div class="divider"></div>
-        <p><strong>João & Maria</strong></p>
-        <p>celebrate love</p>
-        <p>20 Julho 2026</p>
-        <p>Lisboa</p>
-        <p>18:00</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="final-screen" id="final">
-  <h2>Save the Date</h2>
-  <p>Esperamos por ti</p>
-</div>
-
-<script>
-  const envelope = document.getElementById('envelope');
-  const content = document.getElementById('content');
-  const final = document.getElementById('final');
-
-  envelope.addEventListener('click', () => {
-    envelope.classList.add('open');
-
-    setTimeout(() => {
-      content.classList.add('show');
-    }, 800);
-
-    setTimeout(() => {
-      final.classList.add('show');
-    }, 4000);
-  });
-</script>
-
-</body>
+    .letter {
+      position:absolute;
+      width:92%;
+      height:92%;
+      top:4%;
+      left:4%;
+      background:#ffffff;
+      color:#1a1a1a;
+      transform: translateY(110%);
+      padding:30px;
+      text-align:center;
+    }
 </html>
