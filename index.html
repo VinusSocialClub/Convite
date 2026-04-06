@@ -63,6 +63,20 @@
 
 <!-- MAIN -->
 <div class="main" id="main">
+  <!-- COUNTDOWN SECTION -->
+  <section class="countdown">
+    <div class="logo">
+      <h1>D&amp;A</h1>
+    </div>
+    <h2>Countdown to the most special day of our lives</h2>
+    <div id="timer">
+      <div><span id="days">0</span><p>Days</p></div>
+      <div><span id="hours">0</span><p>Hours</p></div>
+      <div><span id="minutes">0</span><p>Minutes</p></div>
+      <div><span id="seconds">0</span><p>Seconds</p></div>
+    </div>
+  </section>
+
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
     <p>14 Outubro 2028 · Lisboa</p>
@@ -89,18 +103,35 @@
   const music = document.getElementById('music');
   const musicBtn = document.getElementById('musicBtn');
 
+  // Countdown
+  const weddingDate = new Date("October 14, 2028 00:00:00").getTime();
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  };
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
   envelope.addEventListener('click', () => {
-    // tocar música no clique, garantindo que browsers permitem
+    // Música funcional garantida
     music.volume = 0.4;
     music.play().catch(() => console.log('Clique necessário para tocar música'));
-
     musicBtn.style.display = 'block';
 
     envelope.classList.add('open');
     setTimeout(() => {
       scene.style.display = 'none';
       main.classList.add('show');
-
       gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
       gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
     }, 1500);
