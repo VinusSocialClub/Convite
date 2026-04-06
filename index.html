@@ -43,7 +43,7 @@
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://orangefreesounds.com/wp-content/uploads/2023/04/Calm-piano-background-music-free.mp3" type="audio/mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f4441b0e7.mp3" type="audio/mp3">
 </audio>
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
@@ -90,7 +90,7 @@
   const musicBtn = document.getElementById('musicBtn');
 
   envelope.addEventListener('click', () => {
-    // tocar música no clique, garantido que browsers permitem
+    // tocar música no clique, garantindo que browsers permitem
     music.volume = 0.4;
     music.play().catch(() => console.log('Clique necessário para tocar música'));
 
