@@ -1,60 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniela & Alexandre</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela & Alexandre</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {font-family:'Inter', sans-serif; background:#0e1a14; overflow:hidden;}
-h1,h2 {font-family:'Playfair Display', serif;}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-.scene {height:100vh; display:flex; justify-content:center; align-items:center;}
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
 
-.envelope {width:340px; height:220px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px;}
-.base {background:#1f3a2e; width:100%; height:100%; position:absolute;}
-.flap {position:absolute; width:100%; height:100%; background:#2e5d46; clip-path: polygon(0 0,50% 60%,100% 0); transform-origin:top; transition:transform 1s ease; z-index:3;}
-.letter {position:absolute; width:92%; height:92%; top:4%; left:4%; background:white; color:#111; padding:25px; text-align:center; transform:translateY(120%); transition:transform 1s ease; z-index:1;}
-.letter-content {opacity:0; transform:translateY(10px); transition:all 0.8s ease;}
-.envelope.open .flap {transform: rotateX(180deg);}
-.envelope.open .letter {transform:translateY(0);}
-.envelope.open .letter-content {opacity:1; transform:translateY(0); transition-delay:0.6s;}
+    body {
+      font-family: 'Inter', sans-serif;
+      background:#0e1a14;
+      overflow:hidden;
+    }
 
-.main {position:fixed; top:0; left:0; width:100%; height:100%; background:#f7f7f7; overflow-y:auto; opacity:0; visibility:hidden; transition:all 1s ease;}
-.main.show {opacity:1; visibility:visible;}
-section {min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; padding:40px; text-align:center;}
+    h1,h2 { font-family:'Playfair Display', serif; }
 
-.hero {background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974'); background-size:cover; background-position:center; color:white;}
+    .scene {
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
 
-.gallery img {width:250px; margin:10px; border-radius:10px;}
+    .envelope {
+      width:340px;
+      height:220px;
+      position:relative;
+      cursor:pointer;
+      overflow:hidden;
+      border-radius:6px;
+    }
 
-.countdown {display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; background:#2e5d46; color:white; text-align:center; margin-top:20px;}
-.countdown .logo h1 {font-size:60px; margin-bottom:15px;}
-.countdown h2 {font-size:20px; margin-bottom:30px;}
-#timer {display:flex; gap:20px; justify-content:center; flex-wrap:wrap;}
-#timer div {background:rgba(255,255,255,0.1); padding:20px; border-radius:10px; min-width:80px;}
-#timer div span {font-size:32px; font-weight:700;}
-#timer div p {margin-top:5px; font-size:14px;}
+    .base { background:#1f3a2e; width:100%; height:100%; position:absolute; }
 
-.rsvp {background:#1f3a2e; color:white;}
-button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; background:white; color:#1f3a2e; cursor:pointer;}
+    .flap {
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:#2e5d46;
+      clip-path: polygon(0 0, 50% 60%, 100% 0);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index:3;
+    }
 
-.music-btn {position:fixed; bottom:20px; right:20px; background:#1f3a2e; color:white; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; z-index:100; display:none;}
-</style>
+    .letter {
+      position:absolute;
+      width:92%;
+      height:92%;
+      top:4%;
+      left:4%;
+      background:white;
+      color:#111;
+      padding:25px;
+      text-align:center;
+      transform: translateY(120%);
+      transition: transform 1s ease;
+      z-index:1;
+    }
 
+    .letter-content {
+      opacity:0;
+      transform: translateY(10px);
+      transition: all 0.8s ease;
+    }
+
+    .envelope.open .flap { transform: rotateX(180deg); }
+    .envelope.open .letter { transform: translateY(0); }
+
+    .envelope.open .letter-content {
+      opacity:1;
+      transform: translateY(0);
+      transition-delay:0.6s;
+    }
+
+    .main {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:#f7f7f7;
+      overflow-y:auto;
+      opacity:0;
+      visibility:hidden;
+      transition: all 1s ease;
+    }
+
+    .main.show {
+      opacity:1;
+      visibility:visible;
+    }
+
+    section {
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      padding:40px;
+      text-align:center;
+    }
+
+    .hero {
+      background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974');
+      background-size:cover;
+      background-position:center;
+      color:white;
+    }
+
+    .gallery img {
+      width:250px;
+      margin:10px;
+      border-radius:10px;
+    }
+
+    .rsvp {
+      background:#1f3a2e;
+      color:white;
+    }
+
+    button {
+      margin-top:20px;
+      padding:12px 24px;
+      border:none;
+      border-radius:30px;
+      background:white;
+      color:#1f3a2e;
+      cursor:pointer;
+    }
+
+    .music-btn {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#1f3a2e;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:20px;
+      cursor:pointer;
+      z-index:100;
+    }
+  </style>
 </head>
 <body>
 
-<audio id="music" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f4441b0e7.mp3" type="audio/mp3">
+<!-- MUSIC (piano clássico calma) -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/09/12/audio_1f01b2a0d7.mp3" type="audio/mp3">
 </audio>
-<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
 
+<!-- ENVELOPE -->
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
     <div class="base"></div>
@@ -68,6 +172,7 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
   </div>
 </div>
 
+<!-- MAIN -->
 <div class="main" id="main">
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
@@ -78,18 +183,6 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
     <h2>Momentos</h2>
     <div>
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
-      
-      <section class="countdown">
-        <div class="logo"><h1>D&amp;A</h1></div>
-        <h2>Countdown to the most special day of our lives</h2>
-        <div id="timer">
-          <div><span id="days">0</span><p>Days</p></div>
-          <div><span id="hours">0</span><p>Hours</p></div>
-          <div><span id="minutes">0</span><p>Minutes</p></div>
-          <div><span id="seconds">0</span><p>Seconds</p></div>
-        </div>
-      </section>
-
       <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" />
     </div>
   </section>
@@ -101,46 +194,30 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
 </div>
 
 <script>
-// Countdown logic
-const target = new Date("October 14, 2028 00:00:00").getTime();
-function updateTimer() {
-  const now = new Date().getTime();
-  const dist = target - now;
-  document.getElementById("days").textContent = Math.floor(dist/(1000*60*60*24));
-  document.getElementById("hours").textContent = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
-  document.getElementById("minutes").textContent = Math.floor((dist%(1000*60*60))/(1000*60));
-  document.getElementById("seconds").textContent = Math.floor((dist%(1000*60))/1000);
-}
-setInterval(updateTimer,1000);
-updateTimer();
+  const envelope = document.getElementById('envelope');
+  const main = document.getElementById('main');
+  const scene = document.getElementById('scene');
+  const music = document.getElementById('music');
 
-// Envelope click
-const envelope = document.getElementById('envelope');
-const scene = document.getElementById('scene');
-const main = document.getElementById('main');
-const music = document.getElementById('music');
-const musicBtn = document.getElementById('musicBtn');
-
-envelope.addEventListener('click', (e) => {
-  // toca música nesse clique — browsers permitem por causa da interação direta :contentReference[oaicite:3]{index=3}
-  music.volume = 0.4;
-  music.play().catch(err => console.log('Audio blocked:', err));
-
-  musicBtn.style.display = 'block';
-
-  envelope.classList.add('open');
-  setTimeout(() => {
+  envelope.addEventListener('click', () => {
+    envelope.classList.add('open');
     scene.style.display = 'none';
     main.classList.add('show');
-    gsap.from('.hero h1', {opacity:0, y:50, duration:1});
-    gsap.from('.gallery img', {scrollTrigger:'.gallery', opacity:0, y:50, stagger:0.2});
-  },1500);
-});
 
-function toggleMusic(){
-  if(music.paused) music.play(); 
-  else music.pause();
-}
+    // tocar música apenas aqui, no clique, garantindo que o browser permite
+    music.volume = 0.4;
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.then(_ => {}).catch(error => { console.log('Interação necessária para tocar música'); });
+    }
+
+    gsap.from('.hero h1', { opacity:0, y:50, duration:1 });
+    gsap.from('.gallery img', { scrollTrigger: '.gallery', opacity:0, y:50, stagger:0.2 });
+  });
+
+  function toggleMusic(){
+    if(music.paused){ music.play(); } else { music.pause(); }
+  }
 </script>
 
 </body>
