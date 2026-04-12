@@ -22,55 +22,48 @@ h1, h2 {
   font-family: 'Playfair Display', serif;
 }
 
-/* CAPA / ENVELOPE */
+/* SCENE */
 .scene {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
   height: 100vh;
-  z-index: 20;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #dfe5de;
 }
 
+/* ENVELOPE - só aparência alterada */
 .envelope {
+  width: 100vw;
+  height: 100vh;
   position: relative;
-  width: 100%;
-  height: 100%;
   cursor: pointer;
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  overflow: hidden;
+  background: url('./envelope-capa.jpg') center center / cover no-repeat;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .envelope.open {
   opacity: 0;
-  transform: scale(1.015);
+  transform: scale(1.01);
 }
 
-.envelope-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: url('./envelope-capa.jpg') center center / cover no-repeat;
-}
-
-/* botão invisível em cima do selo */
+/* área invisível opcional em cima do selo, mas o envelope todo continua clicável */
 .seal-hitbox {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  z-index: 3;
   background: transparent;
 }
 
 /* MAIN */
 .main {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: #f7f7f7;
@@ -203,8 +196,7 @@ button {
 
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
-    <div class="envelope-image"></div>
-    <div class="seal-hitbox" id="sealButton" aria-label="Abrir convite"></div>
+    <div class="seal-hitbox"></div>
   </div>
 </div>
 
@@ -261,15 +253,12 @@ updateCountdown();
 const music = document.getElementById('music');
 const musicBtn = document.getElementById('musicBtn');
 
-// Envelope / abertura
+// Envelope
 const envelope = document.getElementById('envelope');
 const scene = document.getElementById('scene');
 const main = document.getElementById('main');
-const sealButton = document.getElementById('sealButton');
 
-sealButton.addEventListener('click', (e) => {
-  e.stopPropagation();
-
+envelope.addEventListener('click', () => {
   music.volume = 0;
   music.play();
 
@@ -298,7 +287,7 @@ sealButton.addEventListener('click', (e) => {
       y: 50,
       stagger: 0.2
     });
-  }, 900);
+  }, 1500);
 });
 
 function toggleMusic() {
