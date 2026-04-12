@@ -42,7 +42,14 @@ section {min-height:100vh; display:flex; justify-content:center; align-items:cen
 .rsvp {background:#1f3a2e; color:white;}
 button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; background:white; color:#1f3a2e; cursor:pointer;}
 
-.music-btn {position:fixed; bottom:20px; right:20px; background:#1f3a2e; color:white; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; z-index:100; display:block;}
+.music-btn {
+  position:fixed; bottom:20px; right:20px;
+  background:#1f3a2e; color:white;
+  border:none; padding:10px 15px;
+  border-radius:20px; cursor:pointer;
+  z-index:100;
+  display:none; /* 👈 escondido inicialmente */
+}
 </style>
 </head>
 <body>
@@ -51,7 +58,7 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
   <source src="daylight.mp3" type="audio/mp3">
 </audio>
 
-<button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶️ Ouvir Música</button>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
@@ -99,7 +106,7 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
 </div>
 
 <script>
-// Countdown
+// Countdown (igual)
 const weddingDate = new Date("October 14, 2028 00:00:00").getTime();
 function updateCountdown() {
   const now = new Date().getTime();
@@ -114,17 +121,31 @@ updateCountdown();
 
 // Música
 const music = document.getElementById('music');
+const musicBtn = document.getElementById('musicBtn');
 
-// Envelope click (COM MÚSICA CORRIGIDA)
+// Envelope
 const envelope = document.getElementById('envelope');
 const scene = document.getElementById('scene');
 const main = document.getElementById('main');
 
 envelope.addEventListener('click', () => {
 
-    // 🔥 AGORA FUNCIONA
-    music.volume = 0.4;
+    // 🎹 Fade-in suave
+    music.volume = 0;
     music.play();
+
+    let vol = 0;
+    const fade = setInterval(() => {
+        if (vol < 0.4) {
+            vol += 0.02;
+            music.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+    }, 200);
+
+    // mostrar botão
+    musicBtn.style.display = 'block';
 
     envelope.classList.add('open');
 
