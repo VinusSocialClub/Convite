@@ -47,13 +47,12 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
 </head>
 <body>
 
-<!-- BOTÃO DE MÚSICA FUNCIONAL -->
 <audio id="music" loop preload="auto">
   <source src="daylight.mp3" type="audio/mp3">
 </audio>
+
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶️ Ouvir Música</button>
 
-<!-- ENVELOPE -->
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
     <div class="base"></div>
@@ -67,7 +66,6 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
   </div>
 </div>
 
-<!-- CONTEÚDO PRINCIPAL -->
 <div class="main" id="main">
   <section class="hero">
     <h1>Daniela & Alexandre</h1>
@@ -79,7 +77,6 @@ button {margin-top:20px; padding:12px 24px; border:none; border-radius:30px; bac
     <div>
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
       
-      <!-- Countdown abaixo da primeira foto -->
       <section class="countdown">
         <div class="logo"><h1>D&amp;A</h1></div>
         <h2>Countdown to the most special day of our lives</h2>
@@ -115,13 +112,22 @@ function updateCountdown() {
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-// Envelope click
+// Música
+const music = document.getElementById('music');
+
+// Envelope click (COM MÚSICA CORRIGIDA)
 const envelope = document.getElementById('envelope');
 const scene = document.getElementById('scene');
 const main = document.getElementById('main');
 
 envelope.addEventListener('click', () => {
+
+    // 🔥 AGORA FUNCIONA
+    music.volume = 0.4;
+    music.play();
+
     envelope.classList.add('open');
+
     setTimeout(()=>{
         scene.style.display='none';
         main.classList.add('show');
@@ -130,8 +136,6 @@ envelope.addEventListener('click', () => {
     },1500);
 });
 
-// Botão música
-const music = document.getElementById('music');
 function toggleMusic(){
     if(music.paused) music.play();
     else music.pause();
