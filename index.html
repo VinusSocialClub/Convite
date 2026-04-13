@@ -129,6 +129,17 @@ section {
   width: 360px;
   max-width: 60vw;
   margin: -40px auto 30px auto;
+  animation: crestPulse 2.8s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes crestPulse {
+  0%   { transform: scale(1); }
+  8%   { transform: scale(1.04); }
+  16%  { transform: scale(1); }
+  24%  { transform: scale(1.06); }
+  36%  { transform: scale(1); }
+  100% { transform: scale(1); }
 }
 
 .countdown-title {
@@ -289,14 +300,6 @@ envelope.addEventListener('click', () => {
   setTimeout(()=>{
     scene.style.display='none';
     main.classList.add('show');
-
-    gsap.from('.countdown-crest', {
-      opacity: 0,
-      scale: 0.9,
-      duration: 1.2,
-      delay: 0.15,
-      ease: 'power2.out'
-    });
 
     gsap.from('.gallery img',{
       scrollTrigger:'.gallery',
