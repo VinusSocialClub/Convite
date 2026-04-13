@@ -66,13 +66,15 @@ h1, h2 {
   clip-path: inset(0 0 0 var(--split-line));
 }
 
-/* abre ao meio */
+/* abre ao meio com fade */
 .envelope.open .cover-left {
-  transform: translateX(-100%);
+  transform: translateX(-110%);
+  opacity: 0;
 }
 
 .envelope.open .cover-right {
-  transform: translateX(100%);
+  transform: translateX(110%);
+  opacity: 0;
 }
 
 /* MAIN */
@@ -294,7 +296,7 @@ envelope.addEventListener('click', () => {
       y: 50,
       stagger: 0.2
     });
-  }, 1350);
+  }, 2100);
 });
 
 function toggleMusic() {
