@@ -39,12 +39,17 @@ h1, h2 {
   cursor: pointer;
   overflow: hidden;
   background: url('./envelope-capa.jpg') center center / cover no-repeat;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s ease;
+  transform-origin: center center;
 }
 
 .envelope.open {
   opacity: 0;
-  transform: scale(1.01);
+  transform: scale(1.04) translateX(18px);
+  filter: blur(2px);
 }
 
 .seal-hitbox {
@@ -283,7 +288,7 @@ envelope.addEventListener('click', () => {
       y: 50,
       stagger: 0.2
     });
-  }, 1500);
+  }, 1100);
 });
 
 function toggleMusic() {
