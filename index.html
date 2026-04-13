@@ -29,56 +29,38 @@ h1, h2 {
   justify-content: center;
   align-items: center;
   background: #dfe5de;
-  overflow: hidden;
 }
 
-/* ENVELOPE / CAPA ABRE AO MEIO */
+/* ENVELOPE */
 .envelope {
   width: 100vw;
   height: 100vh;
   position: relative;
-  overflow: hidden;
   cursor: pointer;
-}
-
-/* linha real da divisão de cor */
-:root {
-  --split-line: 56%;
-  --right-overlap: 9%;
-}
-
-.cover-left,
-.cover-right {
-  position: absolute;
-  inset: 0;
+  overflow: hidden;
   background: url('./envelope-capa.jpg') center center / cover no-repeat;
   transition:
-    transform 3.1s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 2.4s ease;
-  will-change: transform, opacity;
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s ease;
+  transform-origin: center center;
 }
 
-/* lado esquerdo corta na linha real */
-.cover-left {
-  clip-path: inset(0 calc(100% - var(--split-line)) 0 0);
-  z-index: 1;
-}
-
-/* lado direito começa antes da linha para levar o selo inteiro */
-.cover-right {
-  clip-path: inset(0 0 0 calc(var(--split-line) - var(--right-overlap)));
-  z-index: 2;
-}
-
-/* abre ao meio com fade lento */
-.envelope.open .cover-left {
-  transform: translateX(-115%);
+.envelope.open {
   opacity: 0;
+  transform: scale(1.04) translateX(18px);
+  filter: blur(2px);
 }
 
-.envelope.open .cover-right {
-  transform: translateX(115%);
-  opacity: 0;
+.seal-hitbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: transparent;
 }
 
 /* MAIN */
@@ -199,6 +181,13 @@ button {
   z-index: 100;
   display: none;
 }
+
+@media (max-width: 768px) {
+  .seal-hitbox {
+    width: 120px;
+    height: 120px;
+  }
+}
 </style>
 </head>
 <body>
@@ -211,8 +200,7 @@ button {
 
 <div class="scene" id="scene">
   <div class="envelope" id="envelope">
-    <div class="cover-left"></div>
-    <div class="cover-right"></div>
+    <div class="seal-hitbox"></div>
   </div>
 </div>
 
@@ -300,7 +288,7 @@ envelope.addEventListener('click', () => {
       y: 50,
       stagger: 0.2
     });
-  }, 3000);
+  }, 1100);
 });
 
 function toggleMusic() {
