@@ -5,12 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela & Alexandre</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --sage-main: #8a8d6c;
+  --sage-dark: #76795d;
+  --sage-deep: #676b50;
+  --cream: #f3eee3;
+  --cream-soft: rgba(243, 238, 227, 0.82);
+  --text-dark: #445248;
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -96,7 +105,7 @@ section {
 
 .hero {
   background: url('./hero.jpeg') center center / cover no-repeat;
-  color: #445248;
+  color: var(--text-dark);
 }
 
 .gallery img {
@@ -105,56 +114,92 @@ section {
   border-radius: 10px;
 }
 
+/* COUNTDOWN NOVO */
 .countdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  background: rgba(46, 93, 70, 0.92);
+  width: min(1100px, 92%);
+  min-height: auto;
+  padding: 72px 32px;
+  margin: 28px auto 0;
+  background: var(--sage-main);
   color: white;
   text-align: center;
-  margin-top: 20px;
-  border-radius: 12px;
-  backdrop-filter: blur(2px);
+  border-radius: 0;
+  backdrop-filter: none;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
 }
 
-.countdown .logo h1 {
-  font-size: 60px;
-  margin-bottom: 15px;
+.countdown-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  line-height: 0.9;
+  color: #d9cfbc;
+  margin-bottom: 10px;
+  position: relative;
+  letter-spacing: -2px;
 }
 
-.countdown h2 {
-  font-size: 20px;
-  margin-bottom: 30px;
+.countdown-logo .amp {
+  font-size: 46px;
+  position: relative;
+  top: -6px;
+  margin: 0 -4px;
+}
+
+.countdown-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  color: #ffffff;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.countdown-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #e9dfc8;
+  margin-bottom: 56px;
 }
 
 #timer {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 #timer div {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 10px;
-  min-width: 80px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: 0;
 }
 
 #timer div span {
-  font-size: 32px;
-  font-weight: 700;
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(54px, 7vw, 76px);
+  line-height: 1;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
 #timer div p {
-  margin-top: 5px;
-  font-size: 14px;
+  margin-top: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  color: #efe5cf;
 }
 
+/* RSVP */
 .rsvp {
-  background: rgba(31, 58, 46, 0.94);
+  background: rgba(118, 121, 93, 0.94);
   color: white;
 }
 
@@ -164,7 +209,7 @@ button {
   border: none;
   border-radius: 30px;
   background: white;
-  color: #1f3a2e;
+  color: var(--sage-deep);
   cursor: pointer;
 }
 
@@ -172,7 +217,7 @@ button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #1f3a2e;
+  background: var(--sage-deep);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -182,10 +227,64 @@ button {
   display: none;
 }
 
+@media (max-width: 900px) {
+  .countdown {
+    padding: 56px 24px;
+  }
+
+  .countdown-logo {
+    font-size: 58px;
+  }
+
+  .countdown-title {
+    font-size: 42px;
+  }
+
+  #timer {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 30px 18px;
+    max-width: 420px;
+  }
+}
+
 @media (max-width: 768px) {
   .seal-hitbox {
     width: 120px;
     height: 120px;
+  }
+}
+
+@media (max-width: 520px) {
+  .countdown {
+    width: 94%;
+    padding: 44px 18px;
+  }
+
+  .countdown-logo {
+    font-size: 48px;
+  }
+
+  .countdown-title {
+    font-size: 36px;
+  }
+
+  .countdown-subtitle {
+    font-size: 13px;
+    margin-bottom: 38px;
+  }
+
+  #timer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px 12px;
+  }
+
+  #timer div span {
+    font-size: 52px;
+  }
+
+  #timer div p {
+    font-size: 15px;
+    letter-spacing: 1.8px;
   }
 }
 </style>
@@ -214,8 +313,12 @@ button {
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552" alt="Foto 1" />
 
       <section class="countdown">
-        <div class="logo"><h1>D&amp;A</h1></div>
-        <h2>Contagem para o dia mais especial da nossa vida</h2>
+        <div class="countdown-logo">
+          D<span class="amp">&amp;</span>A
+        </div>
+        <div class="countdown-title">Countdown</div>
+        <div class="countdown-subtitle">To the most special day of our lives</div>
+
         <div id="timer">
           <div><span id="days">0</span><p>Days</p></div>
           <div><span id="hours">0</span><p>Hours</p></div>
