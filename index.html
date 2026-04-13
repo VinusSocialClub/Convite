@@ -17,7 +17,6 @@
   --sage-dark: #76795d;
   --sage-deep: #676b50;
   --cream: #f3eee3;
-  --cream-soft: rgba(243, 238, 227, 0.82);
   --text-dark: #445248;
 }
 
@@ -108,14 +107,6 @@ section {
   color: var(--text-dark);
 }
 
-.gallery {
-  width: 100%;
-}
-
-.gallery-content {
-  width: 100%;
-}
-
 .gallery img {
   width: 250px;
   margin: 10px;
@@ -127,39 +118,16 @@ section {
   width: 100vw;
   min-height: 100vh;
   padding: 100px 40px;
-  margin: 40px 0;
   margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
   background: var(--sage-main);
   color: white;
   text-align: center;
-  border-radius: 0;
-  backdrop-filter: none;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-}
-
-.countdown-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px;
-  line-height: 0.9;
-  color: #d9cfbc;
-  margin-bottom: 10px;
-  position: relative;
-  letter-spacing: -2px;
-}
-
-.countdown-logo .amp {
-  font-size: 46px;
-  position: relative;
-  top: -6px;
-  margin: 0 -4px;
 }
 
 .countdown-title {
   font-family: 'Great Vibes', cursive;
   font-size: 52px;
   color: #ffffff;
-  font-weight: 400;
   margin-bottom: 8px;
 }
 
@@ -181,25 +149,16 @@ section {
   margin: 0 auto;
 }
 
-#timer div {
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-  min-width: 0;
-}
-
 #timer div span {
   display: block;
   font-family: 'Playfair Display', serif;
   font-size: clamp(54px, 7vw, 76px);
   line-height: 1;
-  font-weight: 400;
   color: #ffffff;
   margin-bottom: 10px;
 }
 
 #timer div p {
-  margin-top: 0;
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
   letter-spacing: 2.6px;
@@ -236,69 +195,9 @@ button {
   z-index: 100;
   display: none;
 }
-
-@media (max-width: 900px) {
-  .countdown {
-    padding: 72px 24px;
-    min-height: auto;
-  }
-
-  .countdown-logo {
-    font-size: 58px;
-  }
-
-  .countdown-title {
-    font-size: 42px;
-  }
-
-  #timer {
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 30px 18px;
-    max-width: 420px;
-  }
-}
-
-@media (max-width: 768px) {
-  .seal-hitbox {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-@media (max-width: 520px) {
-  .countdown {
-    padding: 56px 18px;
-  }
-
-  .countdown-logo {
-    font-size: 48px;
-  }
-
-  .countdown-title {
-    font-size: 36px;
-  }
-
-  .countdown-subtitle {
-    font-size: 13px;
-    margin-bottom: 38px;
-  }
-
-  #timer {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 26px 12px;
-  }
-
-  #timer div span {
-    font-size: 52px;
-  }
-
-  #timer div p {
-    font-size: 15px;
-    letter-spacing: 1.8px;
-  }
-}
 </style>
 </head>
+
 <body>
 
 <audio id="music" loop preload="auto">
@@ -314,31 +213,26 @@ button {
 </div>
 
 <div class="main" id="main">
-  <section class="hero">
-  </section>
+  <section class="hero"></section>
 
   <section class="gallery">
     <h2>Momentos</h2>
-    <div class="gallery-content">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552" alt="Foto 1" />
 
-      <section class="countdown">
-        <div class="countdown-logo">
-          D<span class="amp">&amp;</span>A
-        </div>
-        <div class="countdown-title">Countdown</div>
-        <div class="countdown-subtitle">Para o dia mais importante das nossas vidas</div>
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
 
-        <div id="timer">
-          <div><span id="days">0</span><p>Days</p></div>
-          <div><span id="hours">0</span><p>Hours</p></div>
-          <div><span id="minutes">0</span><p>Minutes</p></div>
-          <div><span id="seconds">0</span><p>Seconds</p></div>
-        </div>
-      </section>
+    <section class="countdown">
+      <div class="countdown-title">Countdown</div>
+      <div class="countdown-subtitle">Para o dia mais importante das nossas vidas</div>
 
-      <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" alt="Foto 2" />
-    </div>
+      <div id="timer">
+        <div><span id="days">0</span><p>Days</p></div>
+        <div><span id="hours">0</span><p>Hours</p></div>
+        <div><span id="minutes">0</span><p>Minutes</p></div>
+        <div><span id="seconds">0</span><p>Seconds</p></div>
+      </div>
+    </section>
+
+    <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" />
   </section>
 
   <section class="rsvp">
@@ -348,32 +242,29 @@ button {
 </div>
 
 <script>
-// Countdown
 const weddingDate = new Date("October 14, 2028 00:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
   const dist = weddingDate - now;
 
-  document.getElementById("days").textContent = Math.floor(dist / (1000 * 60 * 60 * 24));
-  document.getElementById("hours").textContent = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  document.getElementById("minutes").textContent = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-  document.getElementById("seconds").textContent = Math.floor((dist % (1000 * 60)) / 1000);
+  days.textContent = Math.floor(dist / (1000*60*60*24));
+  hours.textContent = Math.floor((dist % (1000*60*60*24))/(1000*60*60));
+  minutes.textContent = Math.floor((dist % (1000*60*60))/(1000*60));
+  seconds.textContent = Math.floor((dist % (1000*60))/1000);
 }
 
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
 updateCountdown();
 
-// Música
 const music = document.getElementById('music');
 const musicBtn = document.getElementById('musicBtn');
-
-// Envelope
 const envelope = document.getElementById('envelope');
 const scene = document.getElementById('scene');
 const main = document.getElementById('main');
 
 envelope.addEventListener('click', () => {
+
   music.volume = 0;
   music.play();
 
@@ -382,30 +273,30 @@ envelope.addEventListener('click', () => {
     if (vol < 0.4) {
       vol += 0.02;
       music.volume = vol;
-    } else {
-      clearInterval(fade);
-    }
-  }, 200);
+    } else clearInterval(fade);
+  },200);
 
-  musicBtn.style.display = 'block';
+  musicBtn.style.display='block';
 
   envelope.classList.add('open');
 
-  setTimeout(() => {
-    scene.style.display = 'none';
+  setTimeout(()=>{
+    scene.style.display='none';
     main.classList.add('show');
 
-    gsap.from('.gallery img', {
-      scrollTrigger: '.gallery',
-      opacity: 0,
-      y: 50,
-      stagger: 0.2
+    gsap.from('.gallery img',{
+      scrollTrigger:'.gallery',
+      opacity:0,
+      y:50,
+      stagger:0.2
     });
-  }, 1100);
+
+  },1100);
+
 });
 
-function toggleMusic() {
-  if (music.paused) music.play();
+function toggleMusic(){
+  if(music.paused) music.play();
   else music.pause();
 }
 </script>
