@@ -222,10 +222,6 @@ section {
   animation: scrollSlider 42s linear infinite;
 }
 
-.slider-wrap:hover .slider-track {
-  animation-play-state: paused;
-}
-
 .slide {
   flex: 0 0 auto;
   width: 260px;
@@ -407,7 +403,7 @@ button {
     <div class="welcome-inner">
       <div class="welcome-title">Bem-Vindos</div>
       <div class="welcome-text">
-        Convidamos-te de coração para celebrarem o nosso casamento conosco na encantadora cidade de Viseu. Aguardamos com expectativa compartilhar este momento inesquecível com as pessoas mais especiais da nossa vida.
+        Convidamos-te, de coração, a celebrar connosco o nosso casamento na encantadora cidade de Viseu. Esperamos partilhar este momento inesquecível com as pessoas mais especiais das nossas vidas.
       </div>
 
       <div class="slider-wrap">
@@ -481,7 +477,6 @@ envelope.addEventListener('click', () => {
   setTimeout(()=>{
     scene.style.display='none';
     main.classList.add('show');
-
   },1100);
 
 });
