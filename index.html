@@ -41,9 +41,10 @@ h1, h2 {
   cursor: pointer;
 }
 
-/* Ajuste do corte real da imagem */
+/* linha real da divisão de cor */
 :root {
   --split-line: 56%;
+  --right-overlap: 9%;
 }
 
 .cover-left,
@@ -52,28 +53,31 @@ h1, h2 {
   inset: 0;
   background: url('./envelope-capa.jpg') center center / cover no-repeat;
   transition:
-    transform 2.1s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 1.6s ease;
+    transform 3.1s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 2.4s ease;
   will-change: transform, opacity;
 }
 
-/* corta exatamente na linha marcada */
+/* lado esquerdo corta na linha real */
 .cover-left {
   clip-path: inset(0 calc(100% - var(--split-line)) 0 0);
+  z-index: 1;
 }
 
+/* lado direito começa antes da linha para levar o selo inteiro */
 .cover-right {
-  clip-path: inset(0 0 0 var(--split-line));
+  clip-path: inset(0 0 0 calc(var(--split-line) - var(--right-overlap)));
+  z-index: 2;
 }
 
-/* abre ao meio com fade */
+/* abre ao meio com fade lento */
 .envelope.open .cover-left {
-  transform: translateX(-110%);
+  transform: translateX(-115%);
   opacity: 0;
 }
 
 .envelope.open .cover-right {
-  transform: translateX(110%);
+  transform: translateX(115%);
   opacity: 0;
 }
 
@@ -296,7 +300,7 @@ envelope.addEventListener('click', () => {
       y: 50,
       stagger: 0.2
     });
-  }, 2100);
+  }, 3000);
 });
 
 function toggleMusic() {
