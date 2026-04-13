@@ -31,7 +31,7 @@ h1, h2 {
   background: #dfe5de;
 }
 
-/* ENVELOPE - só aparência alterada */
+/* ENVELOPE */
 .envelope {
   width: 100vw;
   height: 100vh;
@@ -47,7 +47,6 @@ h1, h2 {
   transform: scale(1.01);
 }
 
-/* área invisível opcional em cima do selo, mas o envelope todo continua clicável */
 .seal-hitbox {
   position: absolute;
   left: 50%;
@@ -66,7 +65,9 @@ h1, h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #f7f7f7;
+  background:
+    linear-gradient(rgba(248,248,244,0.88), rgba(248,248,244,0.88)),
+    url('./hero.jpeg') center center / cover no-repeat;
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
@@ -89,12 +90,8 @@ section {
 }
 
 .hero {
-  background:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-    url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974');
-  background-size: cover;
-  background-position: center;
-  color: white;
+  background: url('./hero.jpeg') center center / cover no-repeat;
+  color: #445248;
 }
 
 .gallery img {
@@ -109,10 +106,12 @@ section {
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  background: #2e5d46;
+  background: rgba(46, 93, 70, 0.92);
   color: white;
   text-align: center;
   margin-top: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
 }
 
 .countdown .logo h1 {
@@ -150,7 +149,7 @@ section {
 }
 
 .rsvp {
-  background: #1f3a2e;
+  background: rgba(31, 58, 46, 0.94);
   color: white;
 }
 
@@ -202,8 +201,6 @@ button {
 
 <div class="main" id="main">
   <section class="hero">
-    <h1>Daniela & Alexandre</h1>
-    <p>14 Outubro 2028 · Lisboa</p>
   </section>
 
   <section class="gallery">
@@ -280,7 +277,6 @@ envelope.addEventListener('click', () => {
     scene.style.display = 'none';
     main.classList.add('show');
 
-    gsap.from('.hero h1', { opacity: 0, y: 50, duration: 1 });
     gsap.from('.gallery img', {
       scrollTrigger: '.gallery',
       opacity: 0,
