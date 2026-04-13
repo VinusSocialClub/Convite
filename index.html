@@ -114,12 +114,12 @@ section {
   border-radius: 10px;
 }
 
-/* COUNTDOWN NOVO */
+/* COUNTDOWN */
 .countdown {
-  width: min(1100px, 92%);
-  min-height: auto;
-  padding: 72px 32px;
-  margin: 28px auto 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 40px;
+  margin: 0;
   background: var(--sage-main);
   color: white;
   text-align: center;
@@ -164,10 +164,10 @@ section {
 
 #timer {
   display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 80px;
   width: 100%;
-  max-width: 760px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -229,7 +229,8 @@ button {
 
 @media (max-width: 900px) {
   .countdown {
-    padding: 56px 24px;
+    padding: 72px 24px;
+    min-height: auto;
   }
 
   .countdown-logo {
@@ -256,8 +257,8 @@ button {
 
 @media (max-width: 520px) {
   .countdown {
-    width: 94%;
-    padding: 44px 18px;
+    width: 100%;
+    padding: 56px 18px;
   }
 
   .countdown-logo {
