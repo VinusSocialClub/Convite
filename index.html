@@ -215,24 +215,23 @@ button {
 <div class="main" id="main">
   <section class="hero"></section>
 
+  <section class="countdown">
+    <div class="countdown-title">Countdown</div>
+    <div class="countdown-subtitle">To the most special day of our lives</div>
+
+    <div id="timer">
+      <div><span id="days">0</span><p>Days</p></div>
+      <div><span id="hours">0</span><p>Hours</p></div>
+      <div><span id="minutes">0</span><p>Minutes</p></div>
+      <div><span id="seconds">0</span><p>Seconds</p></div>
+    </div>
+  </section>
+
   <section class="gallery">
     <h2>Momentos</h2>
 
-    <img src="https://images.unsplash.com/photo-1519741497674-611481863552" />
-
-    <section class="countdown">
-      <div class="countdown-title">Countdown</div>
-      <div class="countdown-subtitle">Para o dia mais importante das nossas vidas</div>
-
-      <div id="timer">
-        <div><span id="days">0</span><p>Days</p></div>
-        <div><span id="hours">0</span><p>Hours</p></div>
-        <div><span id="minutes">0</span><p>Minutes</p></div>
-        <div><span id="seconds">0</span><p>Seconds</p></div>
-      </div>
-    </section>
-
-    <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" />
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552" alt="Foto 1" />
+    <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57" alt="Foto 2" />
   </section>
 
   <section class="rsvp">
@@ -264,7 +263,6 @@ const scene = document.getElementById('scene');
 const main = document.getElementById('main');
 
 envelope.addEventListener('click', () => {
-
   music.volume = 0;
   music.play();
 
