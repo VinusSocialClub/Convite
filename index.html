@@ -108,6 +108,14 @@ section {
   color: var(--text-dark);
 }
 
+.gallery {
+  width: 100%;
+}
+
+.gallery-content {
+  width: 100%;
+}
+
 .gallery img {
   width: 250px;
   margin: 10px;
@@ -116,10 +124,12 @@ section {
 
 /* COUNTDOWN */
 .countdown {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   padding: 100px 40px;
-  margin: 0;
+  margin: 40px 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   background: var(--sage-main);
   color: white;
   text-align: center;
@@ -257,7 +267,6 @@ button {
 
 @media (max-width: 520px) {
   .countdown {
-    width: 100%;
     padding: 56px 18px;
   }
 
@@ -310,7 +319,7 @@ button {
 
   <section class="gallery">
     <h2>Momentos</h2>
-    <div>
+    <div class="gallery-content">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552" alt="Foto 1" />
 
       <section class="countdown">
