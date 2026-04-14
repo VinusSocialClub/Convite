@@ -245,22 +245,47 @@ section {
   }
 }
 
-/* RSVP */
-.rsvp {
+/* HISTÓRIA */
+.story {
   background: rgba(118, 121, 93, 0.94);
   color: white;
+  padding: 90px 24px 110px;
+  min-height: auto;
 }
 
-button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 30px;
-  background: white;
-  color: var(--sage-deep);
-  cursor: pointer;
+.story-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 58px;
+  color: #ffffff;
+  margin-bottom: 34px;
 }
 
+.story-grid {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.story-card {
+  background: rgba(255,255,255,0.10);
+  padding: 14px;
+  border-radius: 26px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+  backdrop-filter: blur(3px);
+}
+
+.story-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+
+/* botão música */
 .music-btn {
   position: fixed;
   bottom: 20px;
@@ -275,6 +300,13 @@ button {
   display: none;
 }
 
+@media (max-width: 1100px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+  }
+}
+
 @media (max-width: 900px) {
   .countdown {
     padding: 72px 24px;
@@ -287,7 +319,8 @@ button {
   }
 
   .countdown-title,
-  .welcome-title {
+  .welcome-title,
+  .story-title {
     font-size: 42px;
   }
 
@@ -324,7 +357,8 @@ button {
   }
 
   .countdown-title,
-  .welcome-title {
+  .welcome-title,
+  .story-title {
     font-size: 36px;
   }
 
@@ -364,6 +398,19 @@ button {
 
   .slider-track {
     gap: 18px;
+  }
+
+  .story {
+    padding: 70px 12px 90px;
+  }
+
+  .story-card {
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .story-card img {
+    border-radius: 14px;
   }
 }
 </style>
@@ -434,9 +481,17 @@ button {
     </div>
   </section>
 
-  <section class="rsvp">
-    <h2>Confirmação</h2>
-    <button onclick="alert('RSVP em breve')">Confirmar</button>
+  <section class="story">
+    <div class="story-title">Era uma vez...</div>
+
+    <div class="story-grid">
+      <div class="story-card">
+        <img src="./historia1.jpeg" alt="Era uma vez - capítulo 1">
+      </div>
+      <div class="story-card">
+        <img src="./historia2.jpeg" alt="Era uma vez - capítulo 2">
+      </div>
+    </div>
   </section>
 </div>
 
