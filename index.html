@@ -247,6 +247,50 @@ section {
   }
 }
 
+/* PÁGINAS: IGREJA / QUINTA / CRONOGRAMA */
+.page-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 90px 24px;
+  text-align: center;
+}
+
+.page-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  margin-bottom: 18px;
+}
+
+.page-igreja {
+  background: var(--sage-main);
+  color: #ffffff;
+}
+
+.page-quinta {
+  background: var(--cream);
+  color: var(--sage-deep);
+}
+
+.page-cronograma {
+  background: var(--sage-main);
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .page-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-title {
+    font-size: 36px;
+  }
+}
+
 /* HISTÓRIA */
 .story {
   background: rgba(118, 121, 93, 0.94);
@@ -481,6 +525,18 @@ section {
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="page-section page-igreja">
+    <div class="page-title">Igreja</div>
+  </section>
+
+  <section class="page-section page-quinta">
+    <div class="page-title">Quinta</div>
+  </section>
+
+  <section class="page-section page-cronograma">
+    <div class="page-title">Cronograma</div>
   </section>
 
   <section class="story">
